@@ -1574,8 +1574,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c38f9c1f944363c4c87df2938a83d345, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mFramerate: 1
-  mBoostedFramerate: 10
+  mFramerate: 30
+  mBoostedFramerate: 1
   mCamera: {fileID: 0}
   radarFlashEffect: {fileID: 0}
 --- !u!1 &868834835

@@ -1,7 +1,6 @@
 H:\GlobalGameJam2018\MarsRover\Temp\bin\Debug\Assembly-CSharp.dll
 H:\GlobalGameJam2018\MarsRover\Temp\bin\Debug\Assembly-CSharp.pdb
 H:\GlobalGameJam2018\MarsRover\Temp\bin\Debug\nunit.framework.dll
-H:\GlobalGameJam2018\MarsRover\Temp\bin\Debug\SyntaxTree.VisualStudio.Unity.Bridge.dll
 H:\GlobalGameJam2018\MarsRover\Temp\bin\Debug\UnityEditor.Advertisements.dll
 H:\GlobalGameJam2018\MarsRover\Temp\bin\Debug\UnityEditor.Analytics.dll
 H:\GlobalGameJam2018\MarsRover\Temp\bin\Debug\UnityEditor.dll
@@ -39,7 +38,6 @@ H:\GlobalGameJam2018\MarsRover\Temp\bin\Debug\Unity.Legacy.NRefactory.dll
 H:\GlobalGameJam2018\MarsRover\Temp\bin\Debug\Unity.UNetWeaver.dll
 H:\GlobalGameJam2018\MarsRover\Temp\bin\Debug\Unity.Cecil.Mdb.dll
 H:\GlobalGameJam2018\MarsRover\Temp\bin\Debug\UnityEditor.iOS.Extensions.Xcode.dll
-H:\GlobalGameJam2018\MarsRover\Temp\bin\Debug\SyntaxTree.VisualStudio.Unity.Messaging.dll
 H:\GlobalGameJam2018\MarsRover\Temp\bin\Debug\Unity.CecilTools.dll
 H:\GlobalGameJam2018\MarsRover\Temp\bin\Debug\Unity.Cecil.Pdb.dll
 H:\GlobalGameJam2018\MarsRover\Temp\bin\Debug\UnityEngine.xml
