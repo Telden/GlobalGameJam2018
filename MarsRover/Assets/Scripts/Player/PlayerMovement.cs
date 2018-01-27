@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
 	public float movementSpeed;
 	[Range(0,1)]
 	public float lerpValue;
+	public int reverseMode;
 
 	private Rigidbody rb;
 	private int speedScale;
@@ -26,6 +27,8 @@ public class PlayerMovement : MonoBehaviour
 	{
 		rb = GetComponent<Rigidbody>();
 
+		reverseMode = 1;
+
 		defPosition = transform.position;
 		defRotation = transform.rotation;
 	}
@@ -33,6 +36,7 @@ public class PlayerMovement : MonoBehaviour
 	void Update ()
 	{
 		CheckInput();
+		OtherInput();
 		RotateToNormal();
 	}
 
@@ -76,9 +80,17 @@ public class PlayerMovement : MonoBehaviour
                 speedScale++;
             }
 
-            Vector3 tmpVel = transform.forward * movementSpeed * speedScale;
+            Vector3 tmpVel = transform.forward * movementSpeed * speedScale * reverseMode;
             rb.velocity = new Vector3(tmpVel.x, rb.velocity.y, tmpVel.z);
         }
+	}
+
+	private void OtherInput()
+	{
+		if (Input.GetButtonDown ("Mid2"))
+		{
+			reverseMode *= -1;
+		}
 	}
 
 	private void RotateRover(bool left)
@@ -137,7 +149,7 @@ public class PlayerMovement : MonoBehaviour
 		Invoke ("Respawn", 2.0f);
 	}
 
-	private void Respawn()
+	public void Respawn()
 	{
 		transform.position = defPosition;
 		transform.rotation = defRotation;

@@ -53,23 +53,23 @@ public class PlayerItemCollection : MonoBehaviour
 			{
 				case 1:
 				{
-					GetComponent<PlayerMovement>().defPosition = level1Spawn.position;
-					GetComponent<PlayerMovement>().defRotation = level1Spawn.rotation;
-					currentLevel++;
-					break;
-				}
-				case 2:
-				{
 					GetComponent<PlayerMovement>().defPosition = level2Spawn.position;
 					GetComponent<PlayerMovement>().defRotation = level2Spawn.rotation;
 					currentLevel++;
 					break;
 				}
-				case 3:
+				case 2:
 				{
 					GetComponent<PlayerMovement>().defPosition = level3Spawn.position;
 					GetComponent<PlayerMovement>().defRotation = level3Spawn.rotation;
 					currentLevel++;
+					break;
+				}
+				case 3:
+				{
+					//GetComponent<PlayerMovement>().defPosition = level3Spawn.position;
+					//GetComponent<PlayerMovement>().defRotation = level3Spawn.rotation;
+					//currentLevel++;
 					break;
 				}
 				default:
@@ -78,8 +78,8 @@ public class PlayerItemCollection : MonoBehaviour
 					break;
 				}
 			}
-			GetComponent<PlayerMovement>().defPosition = other.transform.position;
-			GetComponent<PlayerMovement>().defRotation = other.transform.rotation;
+
+			GetComponent<PlayerMovement>().Respawn();
             Destroy(other.gameObject);
         }
     }
