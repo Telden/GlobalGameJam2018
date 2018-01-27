@@ -11,17 +11,23 @@ public class PlayerMovement : MonoBehaviour
 	public float lerpValue;
 
 	private Rigidbody rb;
-
 	private int speedScale;
 
+	[Header("Being grounded")]
 	public LayerMask groundMask;
-
     public bool letItGo = false;
     public bool movementEnabled = true;
+
+	[Header("Default values")]
+	public Vector3 defPosition;
+	public Quaternion defRotation;
 
 	void Start ()
 	{
 		rb = GetComponent<Rigidbody>();
+
+		defPosition = transform.position;
+		defRotation = transform.rotation;
 	}
 
 	void Update ()
@@ -97,19 +103,49 @@ public class PlayerMovement : MonoBehaviour
 		RaycastHit hit;
 		Physics.Raycast(transform.position, transform.up * -1, out hit, groundMask);
 
-        if (Vector3.Angle(hit.normal, Vector3.up) > 45 && letItGo == false)
-        {
-            rb.constraints = RigidbodyConstraints.None;
-            rb.AddForce(hit.normal * 1000);
-            rb.AddTorque(Vector3.up * 1000);
-            letItGo = true;
-            movementEnabled = false;
-            GameObject.Find("RoverCam").GetComponent<CameraFollow>().enabled = false;
-        }
-        else if (letItGo == false)
+        //if (Vector3.Angle(hit.normal, Vector3.up) > 45 && letItGo == false)
+        //{
+		//	Kill (hit.normal);
+        //}
+        //else 
+		if (letItGo == false)
         {
             // not made by me lol, Nick wouldn't email me the link what an ass
             transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.FromToRotation(this.transform.up, hit.normal) * this.transform.rotation, lerpValue);
         }
+	}
+
+	void OnTriggerEnter(Collider other)
+	{
+		if (other.CompareTag ("Kill") && !letItGo)
+		{
+			Kill();
+		}
+	}
+
+	private void Kill()
+	{
+		rb.constraints = RigidbodyConstraints.None;
+		rb.AddForce (transform.up * 1000);
+		rb.AddTorque (Vector3.up * 1000);
+
+		letItGo = true;
+		movementEnabled = false;
+
+		GameObject.Find ("RoverCam").GetComponent<CameraFollow> ().enabled = false;
+
+		Invoke ("Respawn", 2.0f);
+	}
+
+	private void Respawn()
+	{
+		transform.position = defPosition;
+		transform.rotation = defRotation;
+
+		rb.constraints = RigidbodyConstraints.FreezeRotation;
+
+		letItGo = false;
+		movementEnabled = true;
+		GameObject.Find("RoverCam").GetComponent<CameraFollow>().enabled = true;
 	}
 }
