@@ -10,9 +10,13 @@ public class KeypadController : MonoBehaviour {
 	public float keyPressSpeed;
 	public float keyPressDistance;
 
+	private AudioSource auds;
+
 	// Use this for initialization
 	void Start () {
 		keyPositions = new Vector3[9];
+
+		auds = GetComponent<AudioSource>();
 
 		for (int i = 0; i < keys.Length; i++) 
 		{
@@ -66,5 +70,35 @@ public class KeypadController : MonoBehaviour {
 			keys [8].transform.position = Vector3.Lerp (keys [8].transform.position, keyPositions [8] - Vector3.up * keyPressDistance, keyPressSpeed);
 		else
 			keys [8].transform.position = Vector3.Lerp (keys [8].transform.position, keyPositions [8], keyPressSpeed);
+
+		for (int i = 1; i <= 3; i++)
+		{
+			if (Input.GetButtonDown ("Left" + i))
+			{
+				auds.Stop();
+				auds.pitch = Random.Range (0.9f, 1.1f);
+				auds.Play();
+			}
+		}
+
+		for (int i = 1; i <= 3; i++)
+		{
+			if (Input.GetButtonDown ("Mid" + i))
+			{
+				auds.Stop();
+				auds.pitch = Random.Range (0.9f, 1.1f);
+				auds.Play();
+			}
+		}
+
+		for (int i = 1; i <= 3; i++)
+		{
+			if (Input.GetButtonDown ("Right" + i))
+			{
+				auds.Stop();
+				auds.pitch = Random.Range (0.9f, 1.1f);
+				auds.Play();
+			}
+		}
 	}
 }

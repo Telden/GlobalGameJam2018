@@ -23,9 +23,12 @@ public class PlayerMovement : MonoBehaviour
 	public Vector3 defPosition;
 	public Quaternion defRotation;
 
+	private AudioSource auds;
+
 	void Start ()
 	{
 		rb = GetComponent<Rigidbody>();
+		auds = GetComponent<AudioSource>();
 
 		reverseMode = 1;
 
@@ -145,6 +148,8 @@ public class PlayerMovement : MonoBehaviour
 		movementEnabled = false;
 
 		GameObject.Find ("RoverCam").GetComponent<CameraFollow> ().enabled = false;
+
+		auds.Play ();
 
 		Invoke ("Respawn", 2.0f);
 	}

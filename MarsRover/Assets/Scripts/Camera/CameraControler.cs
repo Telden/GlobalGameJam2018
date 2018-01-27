@@ -11,6 +11,8 @@ public class CameraControler : MonoBehaviour {
 	public Camera mCamera;
 	RenderTexture mTexture;
 
+	private AudioSource auds;
+
     public GameObject radarFlashEffect;
     float flashValue = 1;
 
@@ -18,17 +20,26 @@ public class CameraControler : MonoBehaviour {
 	void Start () {
 		mTexture = null;
 		//mCamera.enabled = false;
+
+		if (GetComponent<AudioSource>() != null)
+			auds = GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        if (flashValue > 0)
-            flashValue -= 0.05f;
-        else
-            flashValue = 0;
+		if (flashValue > 0)
+		{
+			flashValue -= 0.05f;
+		}
+		else
+		{
+			flashValue = 0;
+		}
 
-        if (radarFlashEffect != null)
-            radarFlashEffect.GetComponent<Image>().color = new Color(0, 1, 0, flashValue);
+		if (radarFlashEffect != null)
+		{
+			radarFlashEffect.GetComponent<Image> ().color = new Color (0, 1, 0, flashValue);
+		}
     }
 
 	//Take the camera's input for the current frame and save it like a screenshot
@@ -51,7 +62,11 @@ public class CameraControler : MonoBehaviour {
             {
                 flashValue = 1;
                 radarFlashEffect.GetComponent<Image>().color = new Color(0, 1, 0, flashValue);
-                Debug.Log("test");
+				if (auds != null)
+				{
+					auds.Stop ();
+					auds.Play ();
+				}
             }
         }
 
