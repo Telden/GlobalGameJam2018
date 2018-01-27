@@ -25,13 +25,20 @@ public class PlayerMovement : MonoBehaviour
 
 	private AudioSource auds;
 
+	[Header("Battery")]
+	public float mBatteryLeft = 100;
+	public float mBatteryDrain;
+	private float mBoostedBatteryDrain;
+
+	private bool mShouldBoost = false;
+
 	void Start ()
 	{
 		rb = GetComponent<Rigidbody>();
 		auds = GetComponent<AudioSource>();
 
 		reverseMode = 1;
-
+		mBoostedBatteryDrain = mBatteryDrain * 2;
 		defPosition = transform.position;
 		defRotation = transform.rotation;
 	}
@@ -41,12 +48,20 @@ public class PlayerMovement : MonoBehaviour
 		CheckInput();
 		OtherInput();
 		RotateToNormal();
+		if (mBatteryLeft <= 0)
+			Kill ();
 	}
 
 	private void CheckInput()
 	{
 		speedScale = 0;
-
+		if(Input.GetButtonDown("Mid1"))
+		{
+			if (mShouldBoost)
+				mShouldBoost = false;
+			else
+				mShouldBoost = true;
+		}
         if (movementEnabled)
         {
             // left wheels
@@ -85,6 +100,10 @@ public class PlayerMovement : MonoBehaviour
 
             Vector3 tmpVel = transform.forward * movementSpeed * speedScale * reverseMode;
             rb.velocity = new Vector3(tmpVel.x, rb.velocity.y, tmpVel.z);
+			if (!mShouldBoost)
+				mBatteryLeft -= mBatteryDrain * speedScale;
+			else
+				mBatteryLeft -= mBoostedBatteryDrain * speedScale;
         }
 	}
 
@@ -156,6 +175,7 @@ public class PlayerMovement : MonoBehaviour
 
 	public void Respawn()
 	{
+		mBatteryLeft = 100;
 		transform.position = defPosition;
 		transform.rotation = defRotation;
 
