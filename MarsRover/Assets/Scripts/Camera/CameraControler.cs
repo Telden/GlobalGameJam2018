@@ -6,6 +6,7 @@ public class CameraControler : MonoBehaviour {
 
 
 	public float mFramerate;
+	public float mBoostedFramerate;
 	public Camera mCamera;
 	RenderTexture mTexture;
 
@@ -32,7 +33,7 @@ public class CameraControler : MonoBehaviour {
 		}
 
 		//When the desired framerate has been met, set the current "screenshot" of the screen as the current display
-		if (Time.frameCount % 60 == 0)
+		if (Time.frameCount % mFramerate == 0)
 			Graphics.Blit (src, mTexture);
 		
 		//Set the current texture as the displayed image
