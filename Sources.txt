@@ -1,1 +1,2 @@
 https://answers.unity.com/questions/1165285/secondary-camera-with-lower-frame-rate-or-render-e.html
+/* Resource Used https://mikeloscocco.wordpress.com/2015/10/13/mario-galaxy-physics-in-unity/ */
