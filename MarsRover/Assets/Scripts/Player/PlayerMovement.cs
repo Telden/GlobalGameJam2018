@@ -7,10 +7,14 @@ public class PlayerMovement : MonoBehaviour
 	[Header("Movement")]
 	public float rotationSpeed;
 	public float movementSpeed;
+	[Range(0,1)]
+	public float lerpValue;
 
 	private Rigidbody rb;
 
 	private int speedScale;
+
+	public LayerMask groundMask;
 
 	void Start ()
 	{
@@ -20,8 +24,7 @@ public class PlayerMovement : MonoBehaviour
 	void Update ()
 	{
 		CheckInput();
-
-		Debug.Log(rb.velocity.magnitude);
+		RotateToNormal();
 	}
 
 	private void CheckInput()
@@ -68,14 +71,26 @@ public class PlayerMovement : MonoBehaviour
 
 	private void RotateRover(bool left)
 	{
+		Vector3 tmpAngle;
+
 		// rotate left or right
 		if (left)
 		{
-			transform.Rotate(transform.up * Time.deltaTime * rotationSpeed * -1);
+			tmpAngle = transform.up * Time.deltaTime * rotationSpeed * -1;
+			transform.Rotate(0, tmpAngle.y, 0);
 		}
 		else
 		{
-			transform.Rotate(transform.up * Time.deltaTime * rotationSpeed);
+			tmpAngle = transform.up * Time.deltaTime * rotationSpeed;
+			transform.Rotate(0, tmpAngle.y, 0);
 		}
+	}
+
+	private void RotateToNormal()
+	{
+		RaycastHit hit;
+		Physics.Raycast(transform.position, transform.up * -1, out hit, groundMask);
+		// not made by me lol, Nick wouldn't email me the link what an ass
+		transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.FromToRotation(this.transform.up, hit.normal) * this.transform.rotation, lerpValue);
 	}
 }
