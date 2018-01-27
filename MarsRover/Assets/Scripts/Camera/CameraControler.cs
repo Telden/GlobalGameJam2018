@@ -72,9 +72,8 @@ public class CameraControler : MonoBehaviour {
 				Graphics.Blit (src, mTexture);
 
 				if (radarFlashEffect != null) {
-					flashValue = 1;
+					flashValue = 0.5f;
 					radarFlashEffect.GetComponent<Image> ().color = new Color (0, 1, 0, flashValue);
-					Debug.Log ("test");
 				}
 			}
 		} 
@@ -85,9 +84,8 @@ public class CameraControler : MonoBehaviour {
 				Graphics.Blit (src, mTexture);
 
 				if (radarFlashEffect != null) {
-					flashValue = 1;
+					flashValue = 0.5f;
 					radarFlashEffect.GetComponent<Image> ().color = new Color (0, 1, 0, flashValue);
-					Debug.Log ("test");
 				}
 			}
 		}
