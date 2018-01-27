@@ -90,7 +90,7 @@ public class PlayerMovement : MonoBehaviour
 
 	private void OtherInput()
 	{
-		if (Input.GetButtonDown ("Mid2") && movementEnabled)
+		if (Input.GetButtonDown ("Mid2"))
 		{
 			reverseMode *= -1;
 		}
