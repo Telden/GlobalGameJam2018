@@ -39,7 +39,6 @@ public class PlayerMovement : MonoBehaviour
 	void Update ()
 	{
 		CheckInput();
-		OtherInput();
 		RotateToNormal();
 	}
 
@@ -49,6 +48,11 @@ public class PlayerMovement : MonoBehaviour
 
         if (movementEnabled)
         {
+            if (Input.GetButtonDown("Mid2"))
+            {
+                reverseMode *= -1;
+            }
+
             // left wheels
             if (Input.GetButton("Left1"))
             {
@@ -88,13 +92,6 @@ public class PlayerMovement : MonoBehaviour
         }
 	}
 
-	private void OtherInput()
-	{
-		if (Input.GetButtonDown ("Mid2"))
-		{
-			reverseMode *= -1;
-		}
-	}
 
 	private void RotateRover(bool left)
 	{
@@ -156,6 +153,7 @@ public class PlayerMovement : MonoBehaviour
 
 	public void Respawn()
 	{
+        reverseMode = 1;
 		transform.position = defPosition;
 		transform.rotation = defRotation;
 

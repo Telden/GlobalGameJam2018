@@ -13,10 +13,12 @@ public class CameraControler : MonoBehaviour {
 	private bool mShouldBoost = false;
     public GameObject radarFlashEffect;
     float flashValue = 1;
+    ComputerPower mpComputerPower;
 
 	// Use this for initialization
 	void Start () {
 		mTexture = null;
+        mpComputerPower = GameObject.Find("pc_body").GetComponent<ComputerPower>();
 		//mCamera.enabled = false;
 	}
 	
@@ -31,7 +33,8 @@ public class CameraControler : MonoBehaviour {
 
 	private void checkInput()
 	{
-		if(Input.GetButtonDown("Mid1"))
+
+		if(Input.GetButtonDown("Mid1") && mpComputerPower.power)
 		{
 			if (mShouldBoost)
 				mShouldBoost = false;
