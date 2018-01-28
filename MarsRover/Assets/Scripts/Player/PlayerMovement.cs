@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -31,6 +32,9 @@ public class PlayerMovement : MonoBehaviour
     float mBoostedBatteryDrain;
 
     public GameObject batteryBar;
+    public ComputerPower mComputer;
+
+    public Image mStatic;
 
     void Start ()
 	{
@@ -39,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
 
 		reverseMode = 1;
         mShouldBoost = false;
-        mBoostedBatteryDrain = mBatteryDrain * 6;
+        mBoostedBatteryDrain = mBatteryDrain * 5;
         defPosition = transform.position;
 		defRotation = transform.rotation;
 	}
@@ -63,15 +67,22 @@ public class PlayerMovement : MonoBehaviour
 	{
 		speedScale = 0;
 
+        if (Input.GetButtonDown("Mid1") && mComputer.power)
+        {
+            if (!mShouldBoost)
+            {
+                mShouldBoost = true;
+                mStatic.color = new Color(mStatic.color.r, mStatic.color.g, mStatic.color.b, 0.05f);
+            }
+            else
+            {
+                mShouldBoost = false;
+                mStatic.color = new Color(mStatic.color.r, mStatic.color.g, mStatic.color.b, 0.25f);
+            }
+        }
+
         if (movementEnabled)
         {
-            if (Input.GetButtonDown("Mid1"))
-            {
-                if (!mShouldBoost)
-                    mShouldBoost = true;
-                else
-                    mShouldBoost = false;
-            }
             if (Input.GetButtonDown("Mid2"))
             {
                 reverseMode *= -1;
@@ -195,5 +206,5 @@ public class PlayerMovement : MonoBehaviour
 		letItGo = false;
 		movementEnabled = true;
 		GameObject.Find("RoverCam").GetComponent<CameraFollow>().enabled = true;
-	}
+    }
 }
