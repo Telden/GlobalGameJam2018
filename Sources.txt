@@ -1,2 +1,7 @@
-https://answers.unity.com/questions/1165285/secondary-camera-with-lower-frame-rate-or-render-e.html
-/* Resource Used https://mikeloscocco.wordpress.com/2015/10/13/mario-galaxy-physics-in-unity/ */
+Lower frame rate on camera: https://answers.unity.com/questions/1165285/secondary-camera-with-lower-frame-rate-or-render-e.html
+Planet gravity for rotating the rover on terrain: https://mikeloscocco.wordpress.com/2015/10/13/mario-galaxy-physics-in-unity/
+
+Music:
+"Andreas Theme" Kevin MacLeod (incompetech.com)
+Licensed under Creative Commons: By Attribution 3.0 License
+http://creativecommons.org/licenses/by/3.0/

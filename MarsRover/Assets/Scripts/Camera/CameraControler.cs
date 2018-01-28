@@ -60,9 +60,9 @@ public class CameraControler : MonoBehaviour {
 
 
 
-	//Take the camera's input for the current frame and save it like a screenshot
-	//I DO NOT TAKE CREDIT FOR THIS CODE, original author can be found at: (1)
-	void OnRenderImage(RenderTexture src, RenderTexture dest)
+    //Take the camera's input for the current frame and save it like a screenshot
+    // I DO NOT TAKE CREDIT FOR THIS CODE, original author can be found at: https://answers.unity.com/questions/1165285/secondary-camera-with-lower-frame-rate-or-render-e.html
+    void OnRenderImage(RenderTexture src, RenderTexture dest)
 	{
 		//If this is the first frame, set the texture as the current frame from the camera
 		if (mTexture == null) 

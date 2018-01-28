@@ -165,7 +165,7 @@ public class PlayerMovement : MonoBehaviour
         //else 
 		if (letItGo == false)
         {
-            // not made by me lol, Nick wouldn't email me the link what an ass
+            // I DO NOT TAKE CREDIT FOR THIS CODE, original author can be found at: https://mikeloscocco.wordpress.com/2015/10/13/mario-galaxy-physics-in-unity/
             transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.FromToRotation(this.transform.up, hit.normal) * this.transform.rotation, lerpValue);
         }
 	}
