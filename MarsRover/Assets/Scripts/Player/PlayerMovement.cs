@@ -24,15 +24,23 @@ public class PlayerMovement : MonoBehaviour
 	public Quaternion defRotation;
 
 	private AudioSource auds;
+    bool mShouldBoost;
+    [Header("Battery")]
+    public float mBatteryLeft = 100;
+    public float mBatteryDrain;
+    float mBoostedBatteryDrain;
 
-	void Start ()
+    public GameObject batteryBar;
+
+    void Start ()
 	{
 		rb = GetComponent<Rigidbody>();
 		auds = GetComponent<AudioSource>();
 
 		reverseMode = 1;
-
-		defPosition = transform.position;
+        mShouldBoost = false;
+        mBoostedBatteryDrain = mBatteryDrain * 6;
+        defPosition = transform.position;
 		defRotation = transform.rotation;
 	}
 
@@ -40,7 +48,16 @@ public class PlayerMovement : MonoBehaviour
 	{
 		CheckInput();
 		RotateToNormal();
-	}
+        if (mBatteryLeft <= 0)
+            Kill();
+
+        UpdateBatteryDisplay();
+    }
+
+    void UpdateBatteryDisplay()
+    {
+        batteryBar.GetComponent<RectTransform>().localScale = new Vector3(mBatteryLeft / 100, batteryBar.GetComponent<RectTransform>().localScale.y, batteryBar.GetComponent<RectTransform>().localScale.z);
+    }
 
 	private void CheckInput()
 	{
@@ -48,6 +65,13 @@ public class PlayerMovement : MonoBehaviour
 
         if (movementEnabled)
         {
+            if (Input.GetButtonDown("Mid1"))
+            {
+                if (!mShouldBoost)
+                    mShouldBoost = true;
+                else
+                    mShouldBoost = false;
+            }
             if (Input.GetButtonDown("Mid2"))
             {
                 reverseMode *= -1;
@@ -89,6 +113,14 @@ public class PlayerMovement : MonoBehaviour
 
             Vector3 tmpVel = transform.forward * movementSpeed * speedScale * reverseMode;
             rb.velocity = new Vector3(tmpVel.x, rb.velocity.y, tmpVel.z);
+            if (!mShouldBoost)
+                mBatteryLeft -= mBatteryDrain * speedScale;
+            else
+            {
+                print("SPEEED BOOOST");
+                mBatteryLeft -= mBoostedBatteryDrain * speedScale;
+            }
+                
         }
 	}
 
@@ -153,10 +185,11 @@ public class PlayerMovement : MonoBehaviour
 
 	public void Respawn()
 	{
+        rb.velocity = Vector3.zero;
         reverseMode = 1;
 		transform.position = defPosition;
 		transform.rotation = defRotation;
-
+        mBatteryLeft = 100;
 		rb.constraints = RigidbodyConstraints.FreezeRotation;
 
 		letItGo = false;

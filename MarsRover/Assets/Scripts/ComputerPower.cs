@@ -54,5 +54,10 @@ public class ComputerPower : MonoBehaviour
 				radarBlink.SetActive (true);
             }
 		}
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
 	}
 }

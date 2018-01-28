@@ -15,10 +15,14 @@ public class CameraControler : MonoBehaviour {
     float flashValue = 1;
     ComputerPower mpComputerPower;
 
+    private AudioSource auds;
+
 	// Use this for initialization
 	void Start () {
 		mTexture = null;
         mpComputerPower = GameObject.Find("pc_body").GetComponent<ComputerPower>();
+        if (GetComponent<AudioSource>() != null)
+            auds = GetComponent<AudioSource>();
 		//mCamera.enabled = false;
 	}
 	
@@ -77,6 +81,10 @@ public class CameraControler : MonoBehaviour {
 				if (radarFlashEffect != null) {
 					flashValue = 0.5f;
 					radarFlashEffect.GetComponent<Image> ().color = new Color (0, 1, 0, flashValue);
+                    if (auds != null && mpComputerPower.power == true)
+                    {
+                        auds.Play();
+                    }
 				}
 			}
 		} 

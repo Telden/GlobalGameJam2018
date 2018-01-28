@@ -16,11 +16,18 @@ public class PlayerItemCollection : MonoBehaviour
 	public Transform level1Spawn;
 	public Transform level2Spawn;
 	public Transform level3Spawn;
+    public PlayerMovement mpPlayerMovement;
+
+    private GameObject door;
+    bool openDoor;
 
 	void Start ()
     {
         items = GameObject.FindGameObjectsWithTag("Item");
 		currentLevel = 1;
+
+        door = GameObject.Find("Door");
+        openDoor = false;
     }
 
 	void Update ()
@@ -43,6 +50,11 @@ public class PlayerItemCollection : MonoBehaviour
                 }
             }
         }
+
+        if (openDoor == true)
+        {
+            door.transform.Translate(Vector3.up * -0.1f);
+        }
 	}
 
     private void OnTriggerStay(Collider other)
@@ -56,21 +68,22 @@ public class PlayerItemCollection : MonoBehaviour
 					GetComponent<PlayerMovement>().defPosition = level2Spawn.position;
 					GetComponent<PlayerMovement>().defRotation = level2Spawn.rotation;
 					currentLevel++;
-					break;
+                        mpPlayerMovement.mBatteryLeft = 100;
+
+                    break;
 				}
 				case 2:
 				{
 					GetComponent<PlayerMovement>().defPosition = level3Spawn.position;
 					GetComponent<PlayerMovement>().defRotation = level3Spawn.rotation;
 					currentLevel++;
-					break;
+                    mpPlayerMovement.mBatteryLeft = 100;
+                    break;
 				}
 				case 3:
 				{
-					//GetComponent<PlayerMovement>().defPosition = level3Spawn.position;
-					//GetComponent<PlayerMovement>().defRotation = level3Spawn.rotation;
-					//currentLevel++;
-					break;
+                    openDoor = true;
+                    return;
 				}
 				default:
 				{
